@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>面接練習（江原予備校・高卒版）</title>
+<style>
+  :root{
+    --bg:#f4f6f8;--card:#fff;--text:#1f2933;--sub:#5f6b76;--line:#d9dfe5;
+    --main:#1c7ed6;--main-d:#155fa3;--ok:#2b8a3e;--rec:#d92d20;--warn:#f59f00;
+    --soft:#e7f1ff;--soft2:#fff8e1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Hiragino Sans","Meiryo",sans-serif;line-height:1.7;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto;padding:14px 14px 40px}
+  .screen[hidden]{display:none}
+  [hidden]{display:none !important}
+  h1{font-size:1.3rem;margin:6px 0 2px}
+  h2{font-size:1.05rem;margin:0 0 8px}
+  .lead{color:var(--sub);font-size:.9rem;margin:0 0 12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+  label.t{display:block;font-size:.85rem;color:var(--sub);margin:0 0 3px}
+  input[type=text],input[type=password],textarea,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
+  textarea{resize:vertical}
+  button{font:inherit;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;font-weight:700}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  .b-main{background:var(--main);color:#fff}
+  .b-ok{background:var(--ok);color:#fff}
+  .b-rec{background:var(--rec);color:#fff}
+  .b-warn{background:var(--warn);color:#fff}
+  .b-sub{background:#eef1f4;color:#222;font-weight:600;padding:9px 14px}
+  .b-big{font-size:1.1rem;padding:15px 24px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .hint{font-size:.82rem;color:var(--sub)}
+  .msg{font-size:.9rem;margin-top:6px}
+  .err{color:#c92a2a}
+  .notice{background:var(--soft2);border:1px solid #ffe08a;border-radius:10px;padding:8px 12px;font-size:.86rem;margin:8px 0}
+
+  /* 設定 */
+  .grp{margin:12px 0}
+  .grp > .gl{font-size:.88rem;font-weight:700;margin-bottom:5px}
+  .seg{display:flex;gap:6px;flex-wrap:wrap}
+  .seg button{background:#fff;border:2px solid var(--line);color:#444;padding:8px 13px;font-weight:600;font-size:.92rem}
+  .seg button.on{border-color:var(--main);background:var(--soft);color:var(--main-d)}
+  .cats{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+  .cats label{display:flex;gap:8px;align-items:flex-start;font-size:.93rem;cursor:pointer}
+  .cats input{margin-top:6px;width:18px;height:18px}
+  .cats small{color:var(--sub)}
+  @media (max-width:600px){.cats{grid-template-columns:1fr}}
+  details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fafbfc;margin:8px 0}
+  summary{cursor:pointer;font-weight:700;font-size:.92rem}
+
+  /* 問題一覧 */
+  .qrow{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .qrow:last-child{border-bottom:0}
+  .qrow .qn{width:2em;color:var(--sub);font-weight:700}
+  .qrow .qq{flex:1 1 260px;font-size:.95rem}
+  .qrow .qm{font-size:.8rem;color:var(--sub);margin-top:2px}
+  .qrow .qb{display:flex;gap:6px}
+  .pill{display:inline-block;border-radius:99px;padding:1px 9px;font-size:.78rem;background:#eef1f4;color:#444;margin-right:4px}
+  .pill.star{background:#fff1c9;color:#8a5a00;font-weight:700}
+  .ph{background:#fff3a3;border-radius:3px;padding:0 2px}
+  .extras details{border-top:1px solid #e3e7ec;padding:8px 0}
+  .extras summary{cursor:pointer;font-weight:700}
+  .extras li{margin:4px 0}
+  .pill.s{background:#e3f6e8;color:#1e6b31}
+
+  /* 練習 */
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+  .prog{font-weight:700}
+  .tag{display:inline-block;background:var(--soft);color:var(--main-d);border-radius:99px;padding:2px 10px;font-size:.8rem;margin-left:6px}
+  .qbox{font-size:1.25rem;font-weight:700;line-height:1.6;padding:6px 0}
+  .qbox.hidden-q{color:#9aa5b1;font-weight:500;font-size:1rem}
+  .stage{font-size:.9rem;padding:4px 12px;border-radius:99px;background:#eef1f4;color:var(--sub);display:inline-block}
+  .stage.reading{background:var(--soft);color:var(--main-d)}
+  .stage.recording{background:#fee4e2;color:var(--rec)}
+  .stage.paused{background:#fff3bf;color:#a86700}
+  .timer{font-size:2.2rem;font-variant-numeric:tabular-nums;font-weight:800;margin:6px 0 2px}
+  .bar{height:10px;background:#e6eaee;border-radius:99px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:var(--main);transition:width .2s linear}
+  .bar.late > i{background:var(--rec)}
+  .ctl{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .model{background:#f1faf3;border:1px solid #cfe9d6;border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.95rem}
+  .model b{color:var(--ok)}
+  .hintbox{background:var(--soft2);border:1px solid #ffe08a;border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.92rem}
+  .chk label{display:flex;gap:8px;align-items:center;padding:3px 0;cursor:pointer}
+  .chk input{width:18px;height:18px}
+  .rate{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .rate button{background:#fff;border:2px solid var(--line);color:#444;width:46px;padding:8px 0}
+  .rate button.on{background:var(--main);border-color:var(--main);color:#fff}
+  audio{width:100%;margin:8px 0}
+
+  /* 採点 */
+  .scorebox{border:2px solid var(--main);border-radius:14px;padding:14px;margin:12px 0;background:#f7fbff}
+  .scorehead{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .bigscore{font-size:2.8rem;font-weight:800;line-height:1;color:var(--main-d)}
+  .bigscore small{font-size:1rem;font-weight:600;margin-left:2px}
+  .delta{font-weight:700}
+  .delta.up{color:var(--ok)} .delta.down{color:#c92a2a}
+  .item{margin:8px 0}
+  .item .ih{display:flex;justify-content:space-between;font-size:.9rem;font-weight:700}
+  .item .ib{height:8px;background:#e6eaee;border-radius:99px;overflow:hidden;margin:3px 0}
+  .item .ib i{display:block;height:100%;background:var(--main)}
+  .item .ic{font-size:.84rem;color:var(--sub)}
+  .lst{margin:6px 0 6px 1.2em;padding:0;font-size:.92rem}
+  .lst.good li::marker{color:var(--ok)} .lst.imp li::marker{color:var(--warn)}
+  .lh{font-weight:700;font-size:.9rem;margin-top:10px}
+
+  /* 履歴 */
+  table.h{width:100%;border-collapse:collapse;font-size:.88rem}
+  table.h th,table.h td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+  table.h th{color:var(--sub);font-weight:600;white-space:nowrap}
+  .chartbox{margin:8px 0}
+  .res{border-left:5px solid var(--main);padding:8px 12px;margin-bottom:10px;background:#fafbfc;border-radius:8px}
+  .res .rq{font-weight:700}
+  .res .meta{font-size:.82rem;color:var(--sub)}
+  .credit{font-size:.8rem;color:var(--sub);margin-top:18px;text-align:center}
+  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 18px;border-radius:99px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .25s;max-width:92vw;z-index:9}
+  .toast.show{opacity:.95}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== 合言葉 ===== -->
+  <section id="gate" class="screen" hidden>
+    <h1>大津町 二次面接練習【高校卒業程度】（江原予備校）</h1>
+    <p class="lead">江原予備校の生徒さん専用のページです。</p>
+    <form id="gateForm" class="card">
+      <label class="t" for="pass">合言葉</label>
+      <input type="password" id="pass" autocomplete="off" placeholder="先生から教わった合言葉を入力">
+      <div class="row" style="margin-top:12px"><button class="b-main" type="submit">入る</button></div>
+      <div class="msg err" id="gateMsg"></div>
+    </form>
+    <div id="setupBox" class="card" hidden>
+      <h2>合言葉の設定（先生用）</h2>
+      <label class="t" for="newPass">新しい合言葉</label>
+      <input type="text" id="newPass" placeholder="例：kogen-renshu-1015">
+      <p class="hint">下の1行を config.js の passHash の行に貼り付けてください。</p>
+      <textarea id="newHash" rows="2" readonly></textarea>
+    </div>
+  </section>
+
+  <!-- ===== ホーム ===== -->
+  <section id="home" class="screen" hidden>
+    <div class="topbar">
+      <div><h1>大津町 二次面接練習（高卒）</h1><p class="lead" id="homeSub"></p></div>
+      <button class="b-sub" id="btnLogout" type="button">ログアウト</button>
+    </div>
+
+    <div class="card">
+      <h2 id="setTitle"></h2>
+      <p class="hint" id="setIntro"></p>
+      <div id="setPick" class="grp" hidden>
+        <label class="t" for="setSel">問題集</label><select id="setSel"></select>
+      </div>
+      <div class="grp"><label class="t" for="myName">生徒番号またはニックネーム（実名は入れなくてかまいません。記録に使います）</label>
+        <input type="text" id="myName" placeholder="例：koko-01"></div>
+      <div id="consentBox" class="grp" hidden>
+        <label style="display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:.9rem">
+          <input type="checkbox" id="consent" style="margin-top:6px;width:18px;height:18px">
+          <span>「AI採点」と「先生への成績の記録」のために、ニックネーム・回答の文字・点数をインターネット上のサービス（Google・採点AI）に送ることに同意します。<br><small class="hint">音声は送りません。未成年の方は、保護者の方にも説明して同意を得てください。同意しなくても、この端末の中での練習と目安点は使えます。</small></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>1. 分類をえらぶ</h2>
+      <div class="row" style="margin-bottom:8px">
+        <button class="b-sub" id="catAll" type="button">すべて選ぶ</button>
+        <button class="b-sub" id="catNone" type="button">すべて外す</button>
+      </div>
+      <div class="cats" id="cats"></div>
+      <label id="starBox" style="display:none;margin-top:8px;cursor:pointer"><input type="checkbox" id="starOnly" style="width:18px;height:18px;vertical-align:middle"> <span>★の重点問題だけ練習する</span></label>
+      <div id="extras" class="extras"></div>
+    </div>
+
+    <div class="card">
+      <h2>2. 練習のしかた（共通の設定）</h2>
+      <div class="grp"><div class="gl">答える時間</div><div class="seg" data-opt="seconds"></div></div>
+      <div class="grp"><div class="gl">質問の読み上げ</div><div class="seg" data-opt="voice"></div></div>
+      <div class="grp" id="voicePick" hidden>
+        <label class="t" for="voiceSel">ブラウザの声（「Google 日本語」がおすすめです）</label>
+        <div class="row"><select id="voiceSel" style="flex:1 1 220px"></select><button class="b-sub" id="btnVoiceTest" type="button">🔊 試し聞き</button></div>
+        <div class="hint" id="voiceHint"></div>
+      </div>
+      <div class="grp"><div class="gl">質問の文字</div><div class="seg" data-opt="hideText"></div></div>
+      <div class="hint" id="textHint"></div>
+      <div class="grp"><div class="gl">録音の始まり方</div><div class="seg" data-opt="auto"></div></div>
+      <div class="grp"><div class="gl">模範例</div><div class="seg" data-opt="model"></div></div>
+    </div>
+
+    <div class="card">
+      <h2>3. 1問ずつ練習する（おすすめ）</h2>
+      <p class="hint">好きな問題を選んで、何回でも練習できます。1回ごとに点数・アドバイス・模範例が出て、直近10回分の記録が残ります。</p>
+      <div id="qlist"></div>
+    </div>
+
+    <div class="card">
+      <h2>4. 通しで練習する</h2>
+      <p class="hint">選んだ分類の問題を、続けて練習します。</p>
+      <div class="grp"><div class="gl">出題の順番</div><div class="seg" data-opt="order"></div></div>
+      <div class="grp"><div class="gl">問題の数</div><div class="seg" data-opt="count"></div></div>
+      <div class="grp"><div class="gl">対象</div><div class="seg" data-opt="target"></div></div>
+      <div class="row"><button class="b-main b-big" id="btnStart" type="button">通しで練習をはじめる</button></div>
+      <div class="msg err" id="startMsg"></div>
+      <p class="hint">はじめるとマイクの使用を聞かれます。「許可」を選んでください。録音は、この端末の中だけで扱われます（外部には送られません）。</p>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary>記録の管理</summary>
+        <p class="hint">記録はこの端末のブラウザの中に保存されています。別の端末や、ブラウザのデータを消した場合は見えなくなります。</p>
+        <div class="row"><button class="b-sub" id="btnResetStats" type="button">すべての記録を消す</button></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== 練習 ===== -->
+  <section id="practice" class="screen" hidden>
+    <div class="topbar">
+      <div><span class="prog" id="prog"></span><span class="tag" id="qcat"></span></div>
+      <button class="b-sub" id="btnQuit" type="button">練習を終える</button>
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content:space-between">
+        <span class="stage" id="stage">準備中</span>
+        <button class="b-sub" id="btnReplay" type="button">🔊 もう一度聞く</button>
+      </div>
+      <div class="qbox" id="qtext"></div>
+      <button class="b-sub" id="btnShowQ" type="button" hidden>質問の文字を見る</button>
+      <div class="notice" id="pNotice" hidden></div>
+    </div>
+
+    <div class="card" id="answerCard">
+      <div class="timer" id="timer">00:00</div>
+      <div class="bar" id="bar"><i></i></div>
+      <div class="ctl">
+        <button class="b-rec b-big" id="btnRec" type="button" disabled>● 話しはじめる</button>
+        <button class="b-warn" id="btnPause" type="button" disabled>⏸ 中断</button>
+        <button class="b-sub" id="btnStopAns" type="button" disabled>■ 答え終わり</button>
+      </div>
+      <p class="hint" id="recHint"></p>
+    </div>
+
+    <div class="card" id="review" hidden>
+      <h2>聞き直して、点数とアドバイスを見ましょう</h2>
+      <audio id="player" controls></audio>
+      <div class="hint" id="revMeta"></div>
+      <div class="grp"><label class="t" for="trans">話した内容の文字起こし（直せます。自動の文字起こしには誤りがあります）</label>
+        <textarea id="trans" rows="4" placeholder="（文字起こしが使えない場合は、ここに自分で書いても点数を出せます）"></textarea></div>
+
+      <div class="row">
+        <button class="b-sub" id="btnRescore" type="button">この文字で目安点を出す</button>
+        <button class="b-main" id="btnAI" type="button" hidden>AIで採点する</button>
+      </div>
+      <div class="hint" id="aiMsg"></div>
+
+      <div class="scorebox" id="scoreBox" hidden>
+        <div class="scorehead">
+          <div class="bigscore" id="bigScore">--<small>点</small></div>
+          <div><span class="tag" id="scoreKind" style="margin-left:0"></span><div class="delta" id="scoreDelta"></div></div>
+        </div>
+        <div id="itemList"></div>
+        <div class="lh" id="goodH">良かった点</div><ul class="lst good" id="goodList"></ul>
+        <div class="lh" id="impH">改善のアドバイス</div><ul class="lst imp" id="impList"></ul>
+        <div id="aiModel"></div>
+      </div>
+
+      <div id="modelArea"></div>
+      <div class="grp chk"><div class="gl">できたことにチェック</div>
+        <label><input type="checkbox" data-chk="結論から話せた"> 結論から話せた</label>
+        <label><input type="checkbox" data-chk="具体例・数字を入れた"> 具体例や数字を入れた</label>
+        <label><input type="checkbox" data-chk="時間内に話せた"> 時間内に話せた</label>
+        <label><input type="checkbox" data-chk="はっきり話せた"> はっきり落ち着いて話せた</label>
+      </div>
+      <div class="grp"><div class="gl">この問題の自信度（1：まだ不安　5：自信がある）</div>
+        <div class="rate" id="rate"></div></div>
+      <div class="ctl">
+        <button class="b-sub" id="btnAgain" type="button">もう一度答える</button>
+        <button class="b-ok b-big" id="btnNext" type="button">次の問題へ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 履歴 ===== -->
+  <section id="hist" class="screen" hidden>
+    <div class="topbar">
+      <h1 style="margin:0">この問題の記録</h1>
+      <button class="b-sub" id="btnHistBack" type="button">一覧にもどる</button>
+    </div>
+    <div class="card">
+      <div class="qbox" id="hQ" style="font-size:1.1rem"></div>
+      <div class="chartbox" id="hChart"></div>
+      <div id="hTable"></div>
+      <div class="ctl">
+        <button class="b-main" id="btnHistPractice" type="button">この問題を練習する</button>
+        <button class="b-sub" id="btnHistClear" type="button">この問題の記録を消す</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 結果（通し） ===== -->
+  <section id="summary" class="screen" hidden>
+    <h1>おつかれさまでした</h1>
+    <p class="lead" id="sumSub"></p>
+    <div class="card"><h2>今回の記録</h2><div id="sumList"></div></div>
+    <div class="card">
+      <h2>まとめて評価してもらう（Claude）</h2>
+      <p class="hint">通しで答えた記録を、Claudeにまとめて評価してもらうこともできます。依頼文をコピーして、Claudeの画面に貼り付けてください。</p>
+      <div class="row">
+        <button class="b-ok" id="btnCopyPrompt" type="button">評価依頼文をコピー</button>
+        <button class="b-sub" id="btnCopyTrans" type="button">回答の文字だけコピー</button>
+      </div>
+      <p class="hint" id="copyMsg"></p>
+    </div>
+    <div class="row">
+      <button class="b-main" id="btnAgainSame" type="button">同じ設定でもう一度</button>
+      <button class="b-sub" id="btnHome" type="button">ホームに戻る</button>
+    </div>
+  </section>
+
+  <div class="credit" id="credit"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="questions.js"></script>
+<script src="audio/manifest.js" onerror="void 0"></script>
+<script>
+(function(){
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const CFG = Object.assign({title:'面接練習', passHash:'', defaultSeconds:60, endpoint:'', appToken:''}, window.APP_CONFIG || {});
+  const SETS = window.QUESTION_SETS || [];
+  const MAN = window.AUDIO_MANIFEST || null;
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const LS_KEY = 'kogen-renshu-otsu-koko-v1';
+  const MAXHIST = 10;
+
+  /* ---------- 保存（この端末のブラウザの中だけ） ---------- */
+  let mem = {};
+  function loadStore(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }catch(_){ return mem; } }
+  let store = loadStore();
+  function saveStore(){ mem = store; try{ localStorage.setItem(LS_KEY, JSON.stringify(store)); }catch(_){} }
+  store.stats = store.stats || {};
+  store.hist = store.hist || {};
+
+  function toast(t){ const el = $('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('show'), 2800); }
+  function show(id){ ['gate','home','practice','hist','summary'].forEach(s => { $(s).hidden = (s !== id); }); window.scrollTo(0,0); }
+  let starOnly = false;
+  function fillHL(el, text){
+    String(text || '').split(/(〔[^〕]*〕)/).forEach(seg => {
+      if(!seg) return;
+      if(/^〔[^〕]*〕$/.test(seg)){ const s = document.createElement('span'); s.className = 'ph'; s.textContent = seg; el.appendChild(s); }
+      else el.appendChild(document.createTextNode(seg));
+    });
+    return el;
+  }
+  const mmss = ms => { const s = Math.max(0, Math.floor(ms/1000)); return String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0'); };
+  const fmtDate = ts => { const d = new Date(ts); return (d.getMonth()+1) + '/' + d.getDate() + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'); };
+
+  /* ---------- 合言葉 ---------- */
+  function hashPass(str){
+    str = String(str).trim().normalize('NFKC').toLowerCase();
+    let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for(let i=0,ch;i<str.length;i++){ ch = str.charCodeAt(i); h1 = Math.imul(h1^ch, 2654435761); h2 = Math.imul(h2^ch, 1597334677); }
+    h1 = Math.imul(h1^(h1>>>16), 2246822507) ^ Math.imul(h2^(h2>>>13), 3266489909);
+    h2 = Math.imul(h2^(h2>>>16), 2246822507) ^ Math.imul(h1^(h1>>>13), 3266489909);
+    return (4294967296 * (2097151 & h2) + (h1>>>0)).toString(36);
+  }
+  $('gateForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if(hashPass($('pass').value) === CFG.passHash){ store.unlocked = CFG.passHash; saveStore(); enter(); }
+    else { $('gateMsg').textContent = '合言葉がちがいます。もう一度入力してください。'; }
+  });
+  $('newPass').addEventListener('input', () => {
+    const v = $('newPass').value;
+    $('newHash').value = v ? "passHash: '" + hashPass(v) + "'," : '';
+  });
+  $('btnLogout').addEventListener('click', () => { delete store.unlocked; saveStore(); location.hash = ''; show('gate'); $('pass').value = ''; });
+
+  /* ---------- 設定 ---------- */
+  const OPTDEF = {
+    order:   {def:'seq',  list:[['seq','順番どおり'],['rand','ランダム']]},
+    count:   {def:0,      list:[[0,'全部'],[5,'5問'],[10,'10問'],[20,'20問']]},
+    target:  {def:'all',  list:[['all','すべての問題'],['weak','自信がない問題だけ']]},
+    seconds: {def:CFG.defaultSeconds, list:[[30,'30秒'],[60,'60秒'],[90,'90秒'],[120,'120秒'],[0,'時間を決めない']]},
+    voice:   {def:(MAN ? 'file' : 'browser'), list:[['file','VOICEVOXの声'],['browser','ブラウザの声'],['off','読み上げない']]},
+    hideText:{def:false,  list:[[false,'見せる'],[true,'隠す（聞き取り練習）']]},
+    auto:    {def:true,   list:[[true,'読み上げのあと自動で'],[false,'ボタンを押して']]},
+    model:   {def:'after',list:[['after','答えたあとに見る'],['never','見ない']]}
+  };
+  const opts = {};
+  Object.keys(OPTDEF).forEach(k => { opts[k] = (store.opts && k in store.opts) ? store.opts[k] : OPTDEF[k].def; });
+  function renderOpts(){
+    try{ renderVoicePick(); }catch(_){}
+    document.querySelectorAll('.seg[data-opt]').forEach(box => {
+      const k = box.dataset.opt; box.innerHTML = '';
+      OPTDEF[k].list.forEach(([v,t]) => {
+        const b = document.createElement('button'); b.type = 'button'; b.textContent = t;
+        if(opts[k] === v) b.classList.add('on');
+        b.addEventListener('click', () => { opts[k] = v; store.opts = Object.assign({}, opts); saveStore(); renderOpts(); });
+        box.appendChild(b);
+      });
+    });
+  }
+
+  /* ---------- ホーム ---------- */
+  let curSet = SETS[0];
+  let selCats = new Set();
+  let lastCats = null;
+  const statKey = (set, q) => set.id + '/' + q.id;
+  const histOf = (set, q) => store.hist[statKey(set, q)] || [];
+
+  function enter(){
+    if(!SETS.length){ show('home'); $('setTitle').textContent = '問題が見つかりません（questions.js をご確認ください）'; return; }
+    show('home'); renderHome();
+  }
+  function renderHome(){
+    document.title = CFG.title + '（江原予備校）';
+    $('myName').value = store.name || '';
+    $('consentBox').hidden = !CFG.endpoint;
+    $('consent').checked = !!store.consent;
+    if(SETS.length > 1){
+      $('setPick').hidden = false; const sel = $('setSel'); sel.innerHTML = '';
+      SETS.forEach(s => { const o = document.createElement('option'); o.value = s.id; o.textContent = s.title; if(s.id === curSet.id) o.selected = true; sel.appendChild(o); });
+    }
+    $('setTitle').textContent = curSet.title;
+    $('setIntro').textContent = curSet.intro || '';
+    const total = curSet.questions.length;
+    const done = curSet.questions.filter(q => (store.stats[statKey(curSet,q)] || {}).n > 0).length;
+    $('homeSub').textContent = total + '問中 ' + done + '問を練習ずみ';
+    selCats = lastCats ? new Set(lastCats) : new Set(curSet.categories.map(c => c.id));
+    renderCats(); renderOpts(); renderQList();
+    const hasStar = curSet.questions.some(q => q.star);
+    $('starBox').style.display = hasStar ? 'block' : 'none';
+    if(!hasStar){ starOnly = false; $('starOnly').checked = false; }
+    const ex = $('extras'); ex.innerHTML = '';
+    (curSet.extras || []).forEach(g => {
+      if(!g.items || !g.items.length) return;
+      const d = document.createElement('details'); const s = document.createElement('summary'); s.textContent = g.title; d.appendChild(s);
+      const ul = document.createElement('ul'); g.items.forEach(x => { const li = document.createElement('li'); fillHL(li, x); ul.appendChild(li); }); d.appendChild(ul); ex.appendChild(d);
+    });
+  }
+  $('starOnly').addEventListener('change', () => { starOnly = $('starOnly').checked; renderQList(); });
+  function renderCats(){
+    const box = $('cats'); box.innerHTML = '';
+    curSet.categories.forEach(c => {
+      const n = curSet.questions.filter(q => q.cat === c.id).length;
+      const lb = document.createElement('label'); const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = selCats.has(c.id);
+      cb.addEventListener('change', () => { cb.checked ? selCats.add(c.id) : selCats.delete(c.id); renderQList(); });
+      const sp = document.createElement('span'); sp.textContent = c.name + ' '; const sm = document.createElement('small'); sm.textContent = '（' + n + '問）';
+      sp.appendChild(sm); lb.appendChild(cb); lb.appendChild(sp); box.appendChild(lb);
+    });
+  }
+  function renderQList(){
+    const box = $('qlist'); box.innerHTML = '';
+    const qs = curSet.questions.filter(q => selCats.has(q.cat) && (!starOnly || q.star));
+    if(!qs.length){ box.innerHTML = '<p class="hint">分類を選ぶと、問題が表示されます。</p>'; return; }
+    qs.forEach(q => {
+      const idx = curSet.questions.indexOf(q) + 1;
+      const h = histOf(curSet, q); const st = store.stats[statKey(curSet,q)] || {n:0};
+      const row = document.createElement('div'); row.className = 'qrow';
+      const n = document.createElement('div'); n.className = 'qn'; n.textContent = idx;
+      const mid = document.createElement('div'); mid.className = 'qq';
+      const t = document.createElement('div'); t.textContent = q.q;
+      const m = document.createElement('div'); m.className = 'qm';
+      const scores = h.map(x => x.score).filter(x => typeof x === 'number');
+      const pill = (txt, cls) => { const s = document.createElement('span'); s.className = 'pill' + (cls ? ' ' + cls : ''); s.textContent = txt; m.appendChild(s); };
+      if(q.star) pill('★重点', 'star');
+      if(st.n){ pill(st.n + '回練習'); }
+      else { pill('未練習'); }
+      if(scores.length){ pill('前回 ' + scores[scores.length-1] + '点', 's'); pill('最高 ' + Math.max.apply(null, scores) + '点', 's'); }
+      mid.appendChild(t); mid.appendChild(m);
+      const bt = document.createElement('div'); bt.className = 'qb';
+      const b1 = document.createElement('button'); b1.type = 'button'; b1.className = 'b-main'; b1.textContent = '練習する'; b1.style.padding = '8px 14px';
+      b1.addEventListener('click', () => startSingle(q));
+      bt.appendChild(b1);
+      if(h.length){
+        const b2 = document.createElement('button'); b2.type = 'button'; b2.className = 'b-sub'; b2.textContent = '記録'; b2.addEventListener('click', () => openHist(q));
+        bt.appendChild(b2);
+      }
+      row.appendChild(n); row.appendChild(mid); row.appendChild(bt); box.appendChild(row);
+    });
+  }
+  $('setSel').addEventListener('change', () => { curSet = SETS.find(s => s.id === $('setSel').value) || SETS[0]; lastCats = null; renderHome(); });
+  $('myName').addEventListener('input', () => { store.name = $('myName').value.trim(); saveStore(); });
+  $('consent').addEventListener('change', () => { store.consent = $('consent').checked; saveStore(); });
+  $('catAll').addEventListener('click', () => { selCats = new Set(curSet.categories.map(c => c.id)); renderCats(); renderQList(); });
+  $('catNone').addEventListener('click', () => { selCats = new Set(); renderCats(); renderQList(); });
+  $('btnResetStats').addEventListener('click', () => {
+    if(confirm('これまでの練習の記録（回数・点数・自信度）をすべて消します。よろしいですか？')){ store.stats = {}; store.hist = {}; store.sessions = 0; saveStore(); renderHome(); toast('記録を消しました'); }
+  });
+
+  /* ---------- 出題（通し） ---------- */
+  function buildQueue(){
+    let qs = curSet.questions.filter(q => selCats.has(q.cat) && (!starOnly || q.star));
+    if(opts.target === 'weak') qs = qs.filter(q => { const s = store.stats[statKey(curSet,q)]; return !s || !s.n || (s.last && s.last <= 3); });
+    if(opts.order === 'rand'){ for(let i=qs.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [qs[i],qs[j]] = [qs[j],qs[i]]; } }
+    if(opts.count > 0) qs = qs.slice(0, opts.count);
+    return qs;
+  }
+
+  /* ---------- 読み上げの声（ブラウザ） ---------- */
+  let jaVoices = [];
+  function loadVoices(){
+    try{ jaVoices = ((window.speechSynthesis && speechSynthesis.getVoices()) || []).filter(v => /^ja/i.test(v.lang) || /japan|日本/i.test(v.name)); }catch(_){ jaVoices = []; }
+    renderVoicePick();
+  }
+  function pickVoice(){
+    if(!jaVoices.length) return null;
+    if(store.voiceName){ const f = jaVoices.find(v => v.name === store.voiceName); if(f) return f; }
+    return jaVoices.find(v => /google/i.test(v.name)) || jaVoices.find(v => /nanami|kyoko|otoya|haruka|ichiro|ayumi/i.test(v.name)) || jaVoices[0];
+  }
+  function renderVoicePick(){
+    const box = $('voicePick'); if(!box) return;
+    box.hidden = !(jaVoices.length && opts.voice !== 'off');
+    const sel = $('voiceSel'); sel.innerHTML = '';
+    const cur = pickVoice();
+    jaVoices.forEach(v => { const o = document.createElement('option'); o.value = v.name; o.textContent = v.name + (/google/i.test(v.name) ? '（おすすめ）' : ''); if(cur && cur.name === v.name) o.selected = true; sel.appendChild(o); });
+    $('voiceHint').textContent = (jaVoices.length && !jaVoices.some(v => /google/i.test(v.name))) ? '「Google 日本語」の声がこの端末にはありません。Chrome で開くと、選べる場合があります。' : '';
+    const th = $('textHint');
+    if(th) th.textContent = (opts.voice === 'off' || (!MAN && !jaVoices.length)) ? '※読み上げが使えない設定・環境では、「隠す」にしていても質問の文字を表示します。' : '';
+  }
+  function canHear(q){
+    if(opts.voice === 'off') return false;
+    if(opts.voice === 'file') return !!(MAN && audioUrl(q)) || (('speechSynthesis' in window) && jaVoices.length > 0);
+    return ('speechSynthesis' in window) && jaVoices.length > 0;
+  }
+  if('speechSynthesis' in window){ try{ speechSynthesis.addEventListener('voiceschanged', loadVoices); }catch(_){ speechSynthesis.onvoiceschanged = loadVoices; } }
+
+  /* ---------- 読み上げ ---------- */
+  let S = null;                      // 練習セッション
+  function readText(q){
+    let t = q.read || q.q;
+    const m = curSet.reading || {};
+    Object.keys(m).forEach(k => { t = t.split(k).join(m[k]); });
+    return t;
+  }
+  function audioUrl(q){
+    if(MAN && MAN.ids && !(MAN.ids[curSet.id] || []).includes(q.id)) return null;
+    return 'audio/' + curSet.id + '/' + q.id + '.' + ((MAN && MAN.ext) || 'wav');
+  }
+  function stopSpeech(){
+    if(S && S.audio){ try{ S.audio.pause(); }catch(_){} if(S.audioFin) S.audioFin(true); S.audio = null; }
+    try{ window.speechSynthesis && window.speechSynthesis.cancel(); }catch(_){}
+  }
+  function playFile(url){
+    return new Promise(res => {
+      const a = new Audio(url); S.audio = a; let done = false;
+      const fin = ok => { if(!done){ done = true; S.audioFin = null; res(ok); } };
+      S.audioFin = fin;
+      a.onended = () => fin(true); a.onerror = () => fin(false);
+      const p = a.play(); if(p && p.catch) p.catch(() => fin(false));
+    });
+  }
+  function speakBrowser(text){
+    return new Promise(res => {
+      if(!('speechSynthesis' in window)){ res(); return; }
+      try{ speechSynthesis.cancel(); }catch(_){}
+      const u = new SpeechSynthesisUtterance(text); u.lang = 'ja-JP'; u.rate = 0.95;
+      const pv = pickVoice(); if(pv){ u.voice = pv; u.lang = pv.lang || 'ja-JP'; }
+      let done = false; const fin = () => { if(!done){ done = true; clearTimeout(t); res(); } };
+      u.onend = fin; u.onerror = fin;
+      const t = setTimeout(fin, text.length * 450 + 4000);
+      speechSynthesis.speak(u);
+    });
+  }
+  async function speakQuestion(q, token){
+    if(opts.voice === 'off') return;
+    setStage('reading', '質問を読み上げています');
+    if(opts.voice === 'file'){
+      const url = audioUrl(q);
+      if(url){ const ok = await playFile(url); if(ok) return; }
+      if(token === S.token) showNotice('VOICEVOXの音声ファイルが見つからないため、ブラウザの声で読み上げています。');
+    }
+    if(token !== S.token) return;
+    loadVoices();
+    if(!('speechSynthesis' in window) || !jaVoices.length){
+      $('qtext').className = 'qbox'; $('qtext').textContent = (q.star ? '★ ' : '') + q.q; $('btnShowQ').hidden = true;
+      showNotice('読み上げの声が見つからないため、質問の文字を表示しています。');
+      return;
+    }
+    await speakBrowser(readText(q));
+  }
+  function showNotice(t){ $('pNotice').textContent = t; $('pNotice').hidden = !t; }
+  function setStage(kind, text){ const el = $('stage'); el.textContent = text; el.className = 'stage ' + kind; }
+
+  /* ---------- 練習の開始（通し／1問ずつ） ---------- */
+  async function beginSession(queue, single){
+    S = {queue, idx:0, results:[], token:0, stream:null, micOk:false, cur:null, audio:null, audioFin:null, single:!!single, set:curSet};
+    if(navigator.mediaDevices && window.MediaRecorder){
+      try{ S.stream = await navigator.mediaDevices.getUserMedia({audio:true}); S.micOk = true; }catch(_){ S.micOk = false; }
+    }
+    show('practice');
+    $('recHint').textContent = S.micOk ? '' : 'マイクが使えないため、録音なしで練習します（時間を計るだけです）。ブラウザのマイクの許可をご確認ください。';
+    runQuestion();
+  }
+  $('btnStart').addEventListener('click', () => {
+    $('startMsg').textContent = '';
+    lastCats = new Set(selCats);
+    const queue = buildQueue();
+    if(!queue.length){ $('startMsg').textContent = '出題できる問題がありません。分類や「対象」の設定を見直してください。'; return; }
+    beginSession(queue, false);
+  });
+  function startSingle(q){ lastCats = new Set(selCats); beginSession([q], true); }
+
+  async function runQuestion(){
+    const q = S.queue[S.idx]; const token = ++S.token;
+    S.cur = {q, stage:'reading', elapsed:0, startedAt:0, paused:false, chunks:[], blob:null, url:null, trans:'', committed:false, mr:null, sr:null, srFatal:false, tick:null, score:null};
+    const cat = curSet.categories.find(c => c.id === q.cat);
+    if(S.single){ const n = ((store.stats[statKey(curSet,q)] || {}).n || 0) + 1; $('prog').textContent = 'この問題 ' + n + '回目'; }
+    else $('prog').textContent = (S.idx + 1) + ' / ' + S.queue.length + ' 問目';
+    $('qcat').textContent = cat ? cat.name : '';
+    $('qtext').textContent = (q.star ? '★ ' : '') + q.q;
+    loadVoices();
+    const heard = canHear(q);
+    const hide = !!opts.hideText && heard;
+    $('qtext').className = 'qbox' + (hide ? ' hidden-q' : '');
+    if(hide) $('qtext').textContent = '（質問の文字は隠してあります。耳で聞いて答えましょう）';
+    $('btnShowQ').hidden = !hide;
+    showNotice((opts.hideText && !heard) ? '読み上げが使えない設定・環境のため、質問の文字を表示しています。' : '');
+    $('review').hidden = true; $('answerCard').hidden = false;
+    $('timer').textContent = opts.seconds > 0 ? mmss(opts.seconds * 1000) : '00:00';
+    setBar(0);
+    setButtons({rec:false, pause:false, stop:false, replay:false});
+    await speakQuestion(q, token);
+    if(token !== S.token) return;
+    S.cur.stage = 'ready'; setStage('', '答える準備ができました');
+    setButtons({rec:true, pause:false, stop:false, replay:true});
+    if(opts.auto){
+      setTimeout(() => { if(S && token === S.token && S.cur.stage === 'ready') startAnswer(); }, 900);
+    }
+  }
+  function setButtons(o){
+    $('btnRec').disabled = !o.rec; $('btnPause').disabled = !o.pause; $('btnStopAns').disabled = !o.stop; $('btnReplay').disabled = !o.replay;
+  }
+  function setBar(p){ const b = $('bar'); b.firstElementChild.style.width = Math.min(100, p*100) + '%'; b.classList.toggle('late', p >= 0.9); }
+
+  $('voiceSel').addEventListener('change', () => { store.voiceName = $('voiceSel').value; saveStore(); });
+  $('btnVoiceTest').addEventListener('click', () => { try{ speechSynthesis.cancel(); }catch(_){} speakBrowser('こんにちは。大津町の面接練習です。質問を読み上げます。'); });
+  $('btnShowQ').addEventListener('click', () => { if(!S||!S.cur) return; $('qtext').className = 'qbox'; $('qtext').textContent = (S.cur.q.star ? '★ ' : '') + S.cur.q.q; $('btnShowQ').hidden = true; });
+  $('btnReplay').addEventListener('click', async () => {
+    if(!S || !S.cur || S.cur.stage !== 'ready') return;
+    const token = ++S.token; stopSpeech(); setButtons({rec:false, pause:false, stop:false, replay:false});
+    await speakQuestion(S.cur.q, token);
+    if(token !== S.token) return;
+    S.cur.stage = 'ready'; setStage('', '答える準備ができました'); setButtons({rec:true, pause:false, stop:false, replay:true});
+  });
+
+  /* ----- 録音 ----- */
+  function curElapsed(){ const c = S.cur; return c.elapsed + (c.stage === 'recording' ? Date.now() - c.startedAt : 0); }
+  function startSR(){
+    const c = S.cur; if(!SR || c.srFatal) return;
+    const r = new SR(); r.lang = 'ja-JP'; r.continuous = true; r.interimResults = false;
+    r.onresult = e => {
+      for(let i = e.resultIndex; i < e.results.length; i++){ if(e.results[i].isFinal) c.trans += e.results[i][0].transcript; }
+    };
+    r.onerror = e => { if(e.error !== 'no-speech' && e.error !== 'aborted') c.srFatal = true; };
+    r.onend = () => { if(c.sr === r){ c.sr = null; } if(c.stage === 'recording' && !c.srFatal && S.cur === c) startSR(); if(c.srEndCb){ const f = c.srEndCb; c.srEndCb = null; f(); } };
+    c.sr = r; try{ r.start(); }catch(_){ c.sr = null; }
+  }
+  function stopSR(){
+    const c = S.cur;
+    return new Promise(res => {
+      if(!c.sr){ res(); return; }
+      const t = setTimeout(res, 900); c.srEndCb = () => { clearTimeout(t); res(); };
+      try{ c.sr.stop(); }catch(_){ clearTimeout(t); res(); }
+    });
+  }
+  function startAnswer(){
+    const c = S.cur; if(!c || c.stage !== 'ready') return;
+    ++S.token; stopSpeech();
+    c.chunks = []; c.trans = '';
+    if(S.micOk){
+      try{
+        c.mr = new MediaRecorder(S.stream);
+        c.mr.ondataavailable = e => { if(e.data && e.data.size) c.chunks.push(e.data); };
+        c.mr.start(500);
+      }catch(_){ c.mr = null; }
+    }
+    c.stage = 'recording'; c.startedAt = Date.now(); c.elapsed = 0;
+    startSR();
+    setStage('recording', S.micOk ? '● 録音中' : '● 時間を計っています');
+    setButtons({rec:false, pause:true, stop:true, replay:false});
+    $('btnPause').textContent = '⏸ 中断';
+    c.tick = setInterval(onTick, 200); onTick();
+  }
+  function onTick(){
+    const c = S.cur; if(!c) return;
+    const el = curElapsed();
+    if(opts.seconds > 0){
+      $('timer').textContent = mmss(opts.seconds*1000 - el); setBar(el / (opts.seconds*1000));
+      if(el >= opts.seconds*1000 && c.stage === 'recording'){ toast('時間です'); finishAnswer(); }
+    }else{ $('timer').textContent = mmss(el); }
+  }
+  $('btnRec').addEventListener('click', startAnswer);
+  $('btnPause').addEventListener('click', () => {
+    const c = S && S.cur; if(!c) return;
+    if(c.stage === 'recording'){
+      c.elapsed += Date.now() - c.startedAt; c.stage = 'paused';
+      if(c.mr && c.mr.state === 'recording') c.mr.pause();
+      if(c.sr){ try{ c.sr.stop(); }catch(_){} }
+      setStage('paused', '⏸ 中断中（時間も止まっています）'); $('btnPause').textContent = '▶ 再開';
+    }else if(c.stage === 'paused'){
+      c.stage = 'recording'; c.startedAt = Date.now();
+      if(c.mr && c.mr.state === 'paused') c.mr.resume();
+      startSR();
+      setStage('recording', S.micOk ? '● 録音中' : '● 時間を計っています'); $('btnPause').textContent = '⏸ 中断';
+    }
+  });
+  $('btnStopAns').addEventListener('click', finishAnswer);
+
+  async function finishAnswer(){
+    const c = S.cur; if(!c || (c.stage !== 'recording' && c.stage !== 'paused')) return;
+    if(c.stage === 'recording') c.elapsed += Date.now() - c.startedAt;
+    c.stage = 'finishing'; clearInterval(c.tick);
+    setButtons({rec:false, pause:false, stop:false, replay:false}); setStage('', 'まとめています…');
+    const mrDone = new Promise(res => {
+      if(c.mr && c.mr.state !== 'inactive'){ c.mr.onstop = () => res(); try{ c.mr.stop(); }catch(_){ res(); } } else res();
+    });
+    await Promise.all([mrDone, stopSR()]);
+    if(S.cur !== c) return;
+    if(c.chunks.length){ c.blob = new Blob(c.chunks, {type: (c.mr && c.mr.mimeType) || 'audio/webm'}); c.url = URL.createObjectURL(c.blob); }
+    showReview();
+  }
+
+  /* =====================================================
+     採点（端末内の目安点）
+  ===================================================== */
+  const norm = s => String(s || '').normalize('NFKC').replace(/\s+/g, '').toLowerCase();
+  function splitSent(t){
+    let s = String(t || '').replace(/\s+/g, '');
+    s = s.replace(/(です|ます|ました|でした|ません|ください)(?![。！？!?、,がのけからしてでとばもはをにへね])(?=.)/g, '$1。');
+    return s.split(/[。！？!?]+/).map(x => x.trim()).filter(Boolean);
+  }
+  function autoScore(q, tr, sec, limit){
+    const t = norm(tr);
+    const items = [];
+    // 1. 時間
+    let ts, tcm;
+    if(limit > 0){
+      const r = sec / limit;
+      if(r >= 0.6){ ts = 20; tcm = '時間を十分に使って話せています。'; }
+      else if(r >= 0.4){ ts = 14; tcm = 'あと少し話せます。理由や具体例を足してみましょう。'; }
+      else if(r >= 0.2){ ts = 8; tcm = '時間がかなり余っています。もう少し詳しく話しましょう。'; }
+      else { ts = 3; tcm = '短すぎます。結論・理由・具体例の順で話してみましょう。'; }
+    }else{
+      if(sec >= 30 && sec <= 90){ ts = 20; tcm = 'ちょうどよい長さです。'; }
+      else if(sec >= 15 && sec <= 120){ ts = 14; tcm = 'もう少し調整できます（目安は30〜90秒）。'; }
+      else { ts = 8; tcm = '長さを調整しましょう（目安は30〜90秒）。'; }
+    }
+    items.push({name:'時間の使い方', score:ts, max:20, comment:tcm});
+    if(t.length < 15){
+      return {total:null, items, good:[], improve:[], note:'文字起こしが少ないため、点数は出せません。上の欄に話した内容を書いて「目安点を出す」を押すか、AI採点をお使いください。', kind:'auto'};
+    }
+    // 2. 要点（キーワード）
+    const keys = (q.keys || []);
+    let missing = [];
+    if(keys.length){
+      let hit = 0;
+      keys.forEach(g => { if(g.some(w => t.includes(norm(w)))) hit++; else missing.push(g[0]); });
+      const cov = hit / keys.length;
+      const sc = Math.round(30 * Math.min(1, cov / 0.75));
+      items.push({name:'要点（内容）', score:sc, max:30,
+        comment: missing.length ? ('模範例にあるポイントのうち ' + hit + '/' + keys.length + ' を話せています。') : 'ポイントをしっかり押さえられています。'});
+    }
+    // 3. 具体性
+    const nums = (t.match(/[0-9]+/g) || []).length + (t.match(/[一二三四五六七八九十百千万]+(回|人|件|つ|点|年|月|日|時間|分|名|校|か月|ヶ月|パーセント|円|位)/g) || []).length;
+    const marks = (t.match(/(例えば|たとえば|具体的|実際|ある日|そのとき|当時|経験|エピソード|場面)/g) || []).length;
+    const cc = nums + marks;
+    const cs = cc >= 3 ? 15 : cc === 2 ? 12 : cc === 1 ? 8 : 3;
+    items.push({name:'具体性', score:cs, max:15, comment: cc >= 2 ? '具体的な言葉（数字・場面）が入っています。' : '数字や具体的な場面（いつ・何人・何回）を1つ入れましょう。'});
+    // 4. 話し方
+    const sents = splitSent(tr);
+    const fil = (t.match(/(えーと|えっと|えー|あのー|あのう|あの|そのー|まあ|なんか)/g) || []).length;
+    const frate = fil / Math.max(1, t.length) * 100;
+    const fs = frate < 1 ? 10 : frate < 2 ? 7 : frate < 4 ? 4 : 2;
+    const polite = sents.filter(s => /(です|ます|ません|でした|ました|ください|ございます)$/.test(s)).length;
+    const pr = sents.length ? polite / sents.length : 0;
+    const ps = pr >= 0.8 ? 10 : pr >= 0.5 ? 6 : 3;
+    // 言い回しのくせ（「〜に対して」「最も大事なことは」など）
+    const HABITS = [
+      {re:/に対して|に対する/g, name:'「〜に対して」', alt:'「〜に」「〜について」「〜にとって」「〜と向き合い」などに言い換えましょう（例：「町民に対して丁寧に」→「町民の方に丁寧に」）'},
+      {re:/(最も|もっとも|一番|いちばん)(大事|大切|重要)/g, name:'「最も大事なことは」', alt:'「欠かせないのは」「土台になるのは」「私が重視したいのは」「まず必要なのは」などに言い換えましょう'},
+      {re:/(?<!最も|もっとも|一番|いちばん)(大事|大切)(なこと|な点)は/g, name:'「大事なことは」', alt:'「〜が鍵です」「〜を心がけます」「〜と考えます」などに言い換えましょう'}
+    ];
+    const habitMsgs = []; let habitHits = 0;
+    HABITS.forEach(hb => {
+      const m = t.match(hb.re); const n = m ? m.length : 0;
+      if(n > 0){ habitHits += n; habitMsgs.push('言い回しのくせ：' + hb.name + 'を' + n + '回使っています。' + (n >= 2 ? '同じ言い回しの繰り返しは、単調に聞こえます。' : 'よく使う言い回しです。ここぞの1回にしぼりましょう。') + hb.alt); }
+    });
+    const habitPen = Math.min(4, habitHits * 2);
+    items.push({name:'話し方', score:Math.max(0, fs + ps - habitPen), max:20,
+      comment: (frate >= 2 ? '「えー」「あの」などが多めです。間をとって話すと落ち着いて聞こえます。' : 'よどみなく話せています。') + (pr < 0.8 ? ' 語尾を「です・ます」にそろえましょう。' : '') + (habitHits ? ' 言い回しのくせにも注意しましょう。' : '')});
+    // 5. 構成
+    const first = sents[0] || '';
+    let st = 0;
+    if(first && first.length <= 80 && /(です|ます|たい|ません|ました)$/.test(first)) st += 8; else if(first && first.length <= 120) st += 4;
+    st += sents.length >= 3 ? 4 : sents.length === 2 ? 2 : 0;
+    const last = sents[sents.length - 1] || '';
+    if(sents.length >= 2 && /(したい|いたします|貢献|考えています|思います|努めます|考えます)/.test(last)) st += 3;
+    items.push({name:'話の組み立て', score:Math.min(15, st), max:15,
+      comment: st >= 12 ? '結論から話し、まとめもできています。' : '最初の1文で結論（答え）を言い、最後にまとめを一言添えましょう。'});
+
+    const sum = items.reduce((a, i) => a + i.score, 0), mx = items.reduce((a, i) => a + i.max, 0);
+    const total = Math.round(sum / mx * 100);
+    const good = [], improve = [];
+    items.forEach(i => {
+      const r = i.score / i.max;
+      if(r >= 0.8) good.push(i.name + '：' + i.comment);
+      else if(r < 0.65 && !(missing.length && i.name === '要点（内容）')) improve.push(i.name + '：' + i.comment);
+    });
+    if(missing.length){
+      const m3 = missing.slice(0, 3).map(w => '「' + w + '」').join('');
+      improve.unshift('要点：模範例にある ' + m3 + ' などのポイントも入れてみましょう（自分の言葉で言い換えてかまいません）。');
+    }
+    habitMsgs.slice().reverse().forEach(m => improve.unshift(m));
+    if(!good.length) good.push('最後まで自分の言葉で答えられました。');
+    if(!improve.length) improve.push('大きな改善点はありません。模範例とくらべて、言い回しをさらに磨きましょう。');
+    return {total, items, good, improve, kind:'auto'};
+  }
+
+  /* =====================================================
+     AI採点・成績の記録（Googleスプレッドシート）
+  ===================================================== */
+  const canSend = () => !!CFG.endpoint && !!store.consent;
+  async function postEndpoint(payload){
+    const body = Object.assign({token: CFG.appToken}, payload);
+    const res = await fetch(CFG.endpoint, {method:'POST', body: JSON.stringify(body)});
+    return await res.json();
+  }
+  async function aiScore(){
+    const c = S && S.cur; if(!c) return;
+    const msg = $('aiMsg'); const tr = $('trans').value.trim();
+    if(tr.length < 5){ msg.textContent = '話した内容の文字がありません。上の欄に文字を入れてから押してください。'; return; }
+    $('btnAI').disabled = true; msg.textContent = 'AIが採点しています…（10〜20秒ほどかかります）';
+    try{
+      const j = await postEndpoint({action:'evaluate', name:store.name || '', set:curSet.title, qid:c.q.id, question:c.q.q,
+        modelAnswer:c.q.a || '', hint:c.q.hint || '', note:((c.q.intent ? '質問の意図：' + c.q.intent + '\n' : '') + (c.q.note || '')), transcript:tr, seconds:Math.round(c.elapsed/1000), limit:opts.seconds});
+      if(!j || !j.ok || !j.result) throw new Error((j && j.error) || '採点できませんでした');
+      const r = j.result;
+      c.score = {total:Math.round(Number(r.total) || 0), items:(r.items || []).map(i => ({name:String(i.name || ''), score:Number(i.score) || 0, max:Number(i.max) || 0, comment:String(i.comment || '')})),
+        good:(r.good || []).map(String), improve:(r.improve || []).map(String), advice:String(r.advice || ''), aiModel:String(r.model || ''), kind:'ai'};
+      msg.textContent = 'AI採点ができました。';
+      renderScore();
+    }catch(e){
+      msg.textContent = 'AI採点に失敗しました（' + (e && e.message ? e.message : '通信エラー') + '）。目安点をご覧ください。';
+    }finally{ $('btnAI').disabled = !store.consent; }
+  }
+  function logAttempt(rec, q){
+    if(!canSend() || !store.name) return;
+    postEndpoint({action:'log', name:store.name, set:curSet.title, qid:q.id, question:q.q, attempt:rec.n, score:rec.score, kind:rec.kind, seconds:rec.sec,
+      good:(rec.good || []).join(' / '), improve:(rec.improve || []).join(' / '), at:rec.at}).then(j => { if(!j || !j.ok) toast('成績の記録に失敗しました'); }).catch(() => toast('成績の記録に失敗しました（通信エラー）'));
+  }
+
+  /* ----- 振り返り ----- */
+  let rating = 0;
+  function renderScore(){
+    const c = S.cur, sc = c.score, box = $('scoreBox');
+    if(!sc){ box.hidden = true; return; }
+    box.hidden = false;
+    if(sc.total == null){
+      $('bigScore').innerHTML = '--<small>点</small>'; $('scoreKind').textContent = '点数なし'; $('scoreDelta').textContent = '';
+    }else{
+      $('bigScore').textContent = sc.total; const sm = document.createElement('small'); sm.textContent = '点'; $('bigScore').appendChild(sm);
+      $('scoreKind').textContent = sc.kind === 'ai' ? 'AI採点' : '目安点（端末内の簡易採点）';
+      const h = histOf(curSet, c.q).map(x => x.score).filter(x => typeof x === 'number');
+      const dl = $('scoreDelta');
+      if(h.length){ const d = sc.total - h[h.length-1]; dl.textContent = '前回より ' + (d > 0 ? '+' : '') + d + '点'; dl.className = 'delta ' + (d > 0 ? 'up' : d < 0 ? 'down' : ''); }
+      else { dl.textContent = '1回目の記録です'; dl.className = 'delta'; }
+    }
+    const il = $('itemList'); il.innerHTML = '';
+    sc.items.forEach(i => {
+      const d = document.createElement('div'); d.className = 'item';
+      const h = document.createElement('div'); h.className = 'ih';
+      const a = document.createElement('span'); a.textContent = i.name; const b = document.createElement('span'); b.textContent = i.score + ' / ' + i.max;
+      h.appendChild(a); h.appendChild(b);
+      const bar = document.createElement('div'); bar.className = 'ib'; const f = document.createElement('i'); f.style.width = (i.max ? Math.round(i.score / i.max * 100) : 0) + '%'; bar.appendChild(f);
+      const cm = document.createElement('div'); cm.className = 'ic'; cm.textContent = i.comment;
+      d.appendChild(h); d.appendChild(bar); d.appendChild(cm); il.appendChild(d);
+    });
+    const fillList = (id, arr) => { const ul = $(id); ul.innerHTML = ''; (arr || []).forEach(x => { const li = document.createElement('li'); li.textContent = x; ul.appendChild(li); }); };
+    fillList('goodList', sc.good); fillList('impList', sc.improve);
+    $('goodH').hidden = !(sc.good && sc.good.length); $('impH').hidden = !(sc.improve && sc.improve.length);
+    const am = $('aiModel'); am.innerHTML = '';
+    if(sc.note){ const n = document.createElement('div'); n.className = 'hintbox'; n.textContent = sc.note; am.appendChild(n); }
+    if(sc.advice){ const n = document.createElement('div'); n.className = 'hintbox'; n.textContent = '次回へのひとこと：' + sc.advice; am.appendChild(n); }
+    if(sc.aiModel){ const n = document.createElement('div'); n.className = 'model'; const b = document.createElement('b'); b.textContent = 'あなたの回答を活かした模範例（AI）'; n.appendChild(b); n.appendChild(document.createElement('br')); n.appendChild(document.createTextNode(sc.aiModel)); am.appendChild(n); }
+  }
+  function showReview(){
+    const c = S.cur, q = c.q; c.stage = 'review';
+    setStage('', '振り返り');
+    $('answerCard').hidden = true; $('review').hidden = false;
+    const pl = $('player'); if(c.url){ pl.src = c.url; pl.hidden = false; } else { pl.removeAttribute('src'); pl.hidden = true; }
+    $('revMeta').textContent = '話した時間：' + mmss(c.elapsed) + (opts.seconds > 0 ? '（目安 ' + opts.seconds + '秒）' : '') + (SR ? '' : '　※このブラウザは自動の文字起こしに対応していません（Chrome/Edge推奨）');
+    $('trans').value = c.trans.trim();
+    $('btnAI').hidden = !CFG.endpoint; $('btnAI').disabled = !store.consent;
+    $('aiMsg').textContent = (CFG.endpoint && !store.consent) ? 'AI採点を使うには、ホーム画面の同意にチェックを入れてください。' : '';
+    c.score = autoScore(q, $('trans').value, Math.round(c.elapsed/1000), opts.seconds);
+    renderScore();
+    const area = $('modelArea'); area.innerHTML = '';
+    if(opts.model === 'after'){
+      if(q.a){ const d = document.createElement('div'); d.className = 'model'; d.style.whiteSpace = 'pre-line'; const b = document.createElement('b'); b.textContent = '模範例（型の一例です）'; d.appendChild(b); d.appendChild(document.createElement('br')); fillHL(d, q.a); area.appendChild(d); }
+      if(q.intent){ const d = document.createElement('div'); d.className = 'hintbox'; d.textContent = '🎯 質問の意図：' + q.intent; area.appendChild(d); }
+      if(q.hint){ const d = document.createElement('div'); d.className = 'hintbox'; d.textContent = '✏ あなた自身の答えを準備する問題です：' + q.hint; area.appendChild(d); }
+      if(q.note){ const d = document.createElement('div'); d.className = 'hintbox'; fillHL(d, '💡 ポイント：' + q.note); d.style.whiteSpace = 'pre-line'; area.appendChild(d); }
+      if(q.follow && q.follow.length){ const d = document.createElement('div'); d.className = 'hintbox'; d.style.whiteSpace = 'pre-line'; d.textContent = '🔁 追加で聞かれそうな質問（次はこれにも答えてみましょう）\n・' + q.follow.join('\n・'); area.appendChild(d); }
+    }
+    document.querySelectorAll('#review [data-chk]').forEach(cb => { cb.checked = false; });
+    rating = 0; renderRate();
+    if(S.single){ $('btnAgain').textContent = 'もう一度答える'; $('btnNext').textContent = '問題一覧にもどる'; }
+    else { $('btnAgain').textContent = 'もう一度答える（記録しない）'; $('btnNext').textContent = (S.idx + 1 >= S.queue.length) ? '結果を見る' : '次の問題へ'; }
+    $('review').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  $('btnRescore').addEventListener('click', () => {
+    const c = S && S.cur; if(!c || c.stage !== 'review') return;
+    c.score = autoScore(c.q, $('trans').value, Math.round(c.elapsed/1000), opts.seconds); renderScore();
+    $('aiMsg').textContent = '';
+  });
+  $('btnAI').addEventListener('click', aiScore);
+  function renderRate(){
+    const box = $('rate'); box.innerHTML = '';
+    for(let i=1;i<=5;i++){
+      const b = document.createElement('button'); b.type = 'button'; b.textContent = i; if(rating === i) b.classList.add('on');
+      b.addEventListener('click', () => { rating = i; renderRate(); }); box.appendChild(b);
+    }
+  }
+
+  function commitCurrent(){
+    const c = S && S.cur; if(!c || c.stage !== 'review' || c.committed) return;
+    c.committed = true;
+    const checks = []; document.querySelectorAll('#review [data-chk]').forEach(cb => { if(cb.checked) checks.push(cb.dataset.chk); });
+    const sc = c.score || {};
+    const r = {q:c.q, trans:$('trans').value.trim(), sec:Math.round(c.elapsed/1000), url:c.url, rating, checks, score:(typeof sc.total === 'number' ? sc.total : null), kind:sc.kind || 'auto'};
+    S.results.push(r);
+    const k = statKey(curSet, c.q); const st = store.stats[k] || {n:0};
+    st.n = (st.n || 0) + 1; if(rating) st.last = rating; st.at = Date.now(); store.stats[k] = st;
+    const h = store.hist[k] || [];
+    const rec = {n:st.n, at:Date.now(), sec:r.sec, score:r.score, kind:r.kind, good:(sc.good || []).slice(0, 2), improve:(sc.improve || []).slice(0, 3), advice:sc.advice || '', trans:r.trans.slice(0, 800)};
+    h.push(rec); while(h.length > MAXHIST) h.shift();
+    store.hist[k] = h; saveStore();
+    logAttempt(rec, c.q);
+  }
+  $('btnAgain').addEventListener('click', () => {
+    if(!S||!S.cur) return;
+    if(S.single){ commitCurrent(); if(S.cur.url) { /* 録音は結果画面用に残す */ } }
+    else if(S.cur.url) URL.revokeObjectURL(S.cur.url);
+    runQuestion();
+  });
+  $('btnNext').addEventListener('click', () => {
+    commitCurrent();
+    if(S.single){ leaveSession(); return; }
+    S.idx++;
+    if(S.idx >= S.queue.length) endSession(); else runQuestion();
+  });
+  $('btnQuit').addEventListener('click', () => {
+    if(S && S.cur && S.cur.stage === 'review') commitCurrent();
+    if(S && S.single){ leaveSession(); return; }
+    if(!S || !S.results.length){ if(!confirm('練習をやめてホームに戻りますか？（まだ記録はありません）')) return; }
+    endSession();
+  });
+
+  function cleanupSession(){
+    if(!S) return;
+    ++S.token; stopSpeech();
+    const c = S.cur; if(c){ clearInterval(c.tick); if(c.mr && c.mr.state !== 'inactive'){ try{ c.mr.onstop = null; c.mr.stop(); }catch(_){} } if(c.sr){ try{ c.sr.onend = null; c.sr.stop(); }catch(_){} } }
+    if(S.stream) S.stream.getTracks().forEach(t => t.stop());
+  }
+  function leaveSession(){
+    cleanupSession(); S = null; renderHome(); show('home');
+    const el = $('qlist'); if(el) el.scrollIntoView({block:'start'});
+  }
+  function endSession(){
+    cleanupSession();
+    if(!S.results.length){ S = null; renderHome(); show('home'); return; }
+    store.sessions = (store.sessions || 0) + 1; saveStore();
+    renderSummary(); show('summary');
+  }
+
+  /* ---------- 履歴 ---------- */
+  let histQ = null;
+  function openHist(q){
+    histQ = q; $('hQ').textContent = q.q;
+    const h = histOf(curSet, q);
+    const box = $('hTable'); box.innerHTML = '';
+    if(!h.length){ box.innerHTML = '<p class="hint">まだ記録がありません。</p>'; }
+    else{
+      const tbl = document.createElement('table'); tbl.className = 'h';
+      tbl.innerHTML = '<thead><tr><th>回</th><th>日時</th><th>点数</th><th>時間</th><th>アドバイス</th></tr></thead>';
+      const tb = document.createElement('tbody');
+      h.slice().reverse().forEach(r => {
+        const tr = document.createElement('tr');
+        const td = txt => { const d = document.createElement('td'); d.textContent = txt; return d; };
+        tr.appendChild(td(r.n + '回')); tr.appendChild(td(fmtDate(r.at)));
+        tr.appendChild(td(r.score == null ? '-' : (r.score + '点' + (r.kind === 'ai' ? '（AI）' : '（目安）'))));
+        tr.appendChild(td(r.sec + '秒'));
+        const adv = (r.improve && r.improve.length ? r.improve.join(' ／ ') : '') + (r.advice ? (' ／ ' + r.advice) : '');
+        tr.appendChild(td(adv || '-')); tb.appendChild(tr);
+      });
+      tbl.appendChild(tb); box.appendChild(tbl);
+    }
+    drawChart(h);
+    show('hist');
+  }
+  function drawChart(h){
+    const box = $('hChart'); box.innerHTML = '';
+    const pts = h.filter(r => typeof r.score === 'number');
+    if(pts.length < 1) return;
+    const W = 560, H = 150, pad = 26, bw = Math.min(40, (W - pad*2) / MAXHIST - 8);
+    let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="点数の推移">';
+    [0,50,100].forEach(v => { const y = H - pad - (H - pad*2) * v / 100; svg += '<line x1="' + pad + '" x2="' + (W - 6) + '" y1="' + y + '" y2="' + y + '" stroke="#d9dfe5" stroke-width="1"/><text x="2" y="' + (y+4) + '" font-size="11" fill="#5f6b76">' + v + '</text>'; });
+    h.forEach((r, i) => {
+      if(typeof r.score !== 'number') return;
+      const x = pad + 6 + i * ((W - pad*2) / MAXHIST), bh = (H - pad*2) * r.score / 100, y = H - pad - bh;
+      svg += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + bh + '" rx="4" fill="' + (r.kind === 'ai' ? '#2b8a3e' : '#1c7ed6') + '"/>';
+      svg += '<text x="' + (x + bw/2) + '" y="' + (y - 4) + '" font-size="11" text-anchor="middle" fill="#1f2933">' + r.score + '</text>';
+      svg += '<text x="' + (x + bw/2) + '" y="' + (H - 8) + '" font-size="11" text-anchor="middle" fill="#5f6b76">' + r.n + '</text>';
+    });
+    svg += '</svg><div class="hint">横軸は練習の回数、青は目安点、緑はAI採点です（直近10回まで）。</div>';
+    box.innerHTML = svg;
+  }
+  $('btnHistBack').addEventListener('click', () => { renderHome(); show('home'); const el = $('qlist'); if(el) el.scrollIntoView({block:'start'}); });
+  $('btnHistPractice').addEventListener('click', () => { if(histQ) startSingle(histQ); });
+  $('btnHistClear').addEventListener('click', () => {
+    if(!histQ) return;
+    if(confirm('この問題の記録（点数・回数）を消します。よろしいですか？')){
+      const k = statKey(curSet, histQ); delete store.hist[k]; delete store.stats[k]; saveStore(); toast('この問題の記録を消しました'); renderHome(); show('home');
+    }
+  });
+
+  /* ---------- 結果（通し） ---------- */
+  function renderSummary(){
+    const rs = S.results;
+    const total = rs.reduce((a,r) => a + r.sec, 0);
+    const sc = rs.map(r => r.score).filter(x => typeof x === 'number');
+    $('sumSub').textContent = rs.length + '問に答えました（合計 ' + mmss(total*1000) + '）' + (sc.length ? '。目安点の平均は ' + Math.round(sc.reduce((a,b) => a+b, 0) / sc.length) + '点です。' : '。');
+    const box = $('sumList'); box.innerHTML = '';
+    rs.forEach((r, i) => {
+      const d = document.createElement('div'); d.className = 'res';
+      const q = document.createElement('div'); q.className = 'rq'; q.textContent = (i+1) + '. ' + r.q.q;
+      const m = document.createElement('div'); m.className = 'meta'; m.textContent = r.sec + '秒' + (r.score != null ? '／' + r.score + '点' + (r.kind === 'ai' ? '（AI）' : '（目安）') : '') + (r.rating ? '／自信度' + r.rating : '') + (r.checks.length ? '／できた：' + r.checks.join('・') : '');
+      d.appendChild(q); d.appendChild(m);
+      if(r.trans){ const t = document.createElement('div'); t.textContent = r.trans; t.style.fontSize = '.92rem'; t.style.marginTop = '4px'; d.appendChild(t); }
+      if(r.url){ const a = document.createElement('audio'); a.controls = true; a.src = r.url; d.appendChild(a); }
+      box.appendChild(d);
+    });
+  }
+  function buildPrompt(){
+    const name = (store.name || '').trim();
+    const lines = [
+      'あなたは、面接指導の経験が豊富な講師です。以下は、「' + curSet.title + '」の想定問答を使った面接練習の記録です。',
+      '生徒が各質問に声で答えた内容を、自動で文字起こししたものです。' + (name ? '生徒の呼び名は「' + name + '」です。' : ''),
+      '生徒は「〜に対して」「最も大事なことは」などの言い回しを繰り返し使う癖があります。同じ言い回しの繰り返しに気づいたら指摘し、言い換えを具体的に示してください。',
+      '受験生は、高校卒業程度（一般事務）の高校3年生です。経験の少なさを責めず、部活動や学校生活の経験を生かした答えを高く評価してください。',
+      '',
+      '生徒は、学習面や将来に不安を抱えている場合もあります。励ましを大切にしながら、具体的で実行しやすい評価をお願いします。',
+      '',
+      '■ 依頼内容',
+      '1. 質問ごとに10点満点で採点し、一言の理由を添える（結論の明確さ、具体性、一貫性、言葉遣い、簡潔さ）',
+      '2. 全体の良かった点（2〜3点）',
+      '3. 改善点（優先度の高い順に2〜3点）',
+      '4. 質問ごとの模範回答例。ただし生徒本人の経験や数字は作り話にせず、「ここにあなたの経験を入れる」と枠で示す',
+      '5. 次回までの練習アドバイス',
+      '',
+      '※ 文字起こしは自動のため誤りがあります。意味から推測して評価してください。',
+      '※ 声の大きさ・表情・姿勢は文字では分からないので、評価に含めないでください。',
+      '',
+      '■ 練習の記録'
+    ];
+    S.results.forEach((r, i) => {
+      lines.push('', '【質問' + (i+1) + '】' + r.q.q, '【回答】' + (r.trans || '（文字起こしなし）') + '（' + r.sec + '秒' + (opts.seconds > 0 ? '／目安' + opts.seconds + '秒' : '') + (r.rating ? '／本人の自信度' + r.rating + '/5' : '') + '）');
+    });
+    return lines.join('\n');
+  }
+  function buildTrans(){
+    return S.results.map((r, i) => '【質問' + (i+1) + '】' + r.q.q + '\n【回答】' + (r.trans || '（文字起こしなし）')).join('\n\n');
+  }
+  async function copyText(text, msg){
+    try{ await navigator.clipboard.writeText(text); }
+    catch(_){ const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); }catch(__){} ta.remove(); }
+    $('copyMsg').textContent = msg;
+  }
+  $('btnCopyPrompt').addEventListener('click', () => copyText(buildPrompt(), '評価依頼文をコピーしました。Claudeの入力欄に貼り付けて送信してください。'));
+  $('btnCopyTrans').addEventListener('click', () => copyText(buildTrans(), '回答の文字をコピーしました。'));
+  $('btnHome').addEventListener('click', () => { S = null; renderHome(); show('home'); });
+  $('btnAgainSame').addEventListener('click', () => { S = null; renderHome(); show('home'); $('btnStart').click(); });
+
+  window.addEventListener('beforeunload', () => { try{ cleanupSession(); }catch(_){} });
+
+  /* ---------- 起動 ---------- */
+  loadVoices();
+  if(MAN && MAN.credit) $('credit').textContent = '読み上げ音声：' + MAN.credit;
+  window.addEventListener('hashchange', () => { if(location.hash === '#setup'){ show('gate'); $('setupBox').hidden = false; } });
+  if(location.hash === '#setup'){ show('gate'); $('setupBox').hidden = false; }
+  else if(!CFG.passHash || store.unlocked === CFG.passHash){ enter(); }
+  else { show('gate'); }
+})();
+</script>
+</body>
+</html>
